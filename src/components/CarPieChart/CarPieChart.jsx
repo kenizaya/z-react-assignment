@@ -41,6 +41,49 @@ const ageRanges = [
   { label: '75-80', value: '75-80' },
 ]
 
+const RADIAN = Math.PI / 180
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  name,
+  value,
+  index,
+}) => {
+  const valueRadius = innerRadius + (outerRadius - innerRadius) * 0.75
+  const valueX = cx + valueRadius * Math.cos(-midAngle * RADIAN)
+  const valueY = cy + valueRadius * Math.sin(-midAngle * RADIAN)
+
+  const nameRadius = innerRadius + (outerRadius - innerRadius) * 1.1
+  const nameX = cx + nameRadius * Math.cos(-midAngle * RADIAN)
+  const nameY = cy + nameRadius * Math.sin(-midAngle * RADIAN)
+
+  return (
+    <>
+      <text
+        x={valueX}
+        y={valueY}
+        fill='white'
+        textAnchor={valueX > cx ? 'start' : 'end'}
+        dominantBaseline='central'
+      >
+        {value}
+      </text>
+      <text
+        x={nameX}
+        y={nameY}
+        fill='#ccccc'
+        textAnchor={nameX > cx ? 'start' : 'end'}
+        dominantBaseline='central'
+      >
+        {name}
+      </text>
+    </>
+  )
+}
+
 const initialAgeRange = ageRanges[0].value
 
 const CarPieChart = ({ users }) => {
@@ -96,7 +139,7 @@ const CarPieChart = ({ users }) => {
                 data={Object.values(makers)}
                 dataKey='value'
                 nameKey='name'
-                label={({ name }) => name}
+                label={renderCustomizedLabel}
                 labelLine={false}
                 cx='50%'
                 cy='50%'
@@ -127,7 +170,7 @@ const CarPieChart = ({ users }) => {
                 data={Object.values(ages)}
                 dataKey='value'
                 nameKey='name'
-                label={({ name }) => name}
+                label={renderCustomizedLabel}
                 labelLine={false}
                 cx='50%'
                 cy='50%'
