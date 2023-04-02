@@ -1,0 +1,168 @@
+import React, { useState } from 'react'
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
+
+const MAKER_COLORS = [
+  '#FFC312',
+  '#C4E538',
+  '#12CBC4',
+  '#FDA7DF',
+  '#ED4C67',
+  '#F79F1F',
+  '#A3CB38',
+  '#1289A7',
+  '#D980FA',
+  '#B53471',
+]
+
+const AGE_COLORS = [
+  '#EE5A24',
+  '#009432',
+  '#0652DD',
+  '#9980FA',
+  '#833471',
+  '#EA2027',
+  '#006266',
+  '#1B1464',
+  '#5758BB',
+  '#6F1E51',
+]
+
+const ageRanges = [
+  { label: '25-30', value: '25-30' },
+  { label: '30-35', value: '30-35' },
+  { label: '35-40', value: '35-40' },
+  { label: '40-45', value: '40-45' },
+  { label: '45-50', value: '45-50' },
+  { label: '50-55', value: '50-55' },
+  { label: '55-60', value: '55-60' },
+  { label: '60-65', value: '60-65' },
+  { label: '65-70', value: '65-70' },
+  { label: '70-75', value: '70-75' },
+  { label: '75-80', value: '75-80' },
+]
+
+const initialAgeRange = ageRanges[0].value
+
+const CarPieChart = ({ users }) => {
+  const [ageRange, setAgeRange] = useState(initialAgeRange)
+
+  const filterData = (range) =>
+    users.filter(
+      (user) =>
+        user.age >= Number(range.split('-')[0]) &&
+        user.age <= Number(range.split('-')[1])
+    )
+  const filteredData = filterData(ageRange)
+
+  const groupByMakerAndModels = (users) =>
+    users.reduce((result, user) => {
+      const { make, model } = user.vehicle
+      if (!result[make]) {
+        result[make] = { name: make, value: 1, models: [model] }
+      } else {
+        result[make].value++
+        if (!result[make].models.includes(model)) {
+          result[make].models.push(model)
+        }
+      }
+      return result
+    }, {})
+
+  const makers = groupByMakerAndModels(filteredData)
+
+  const groupByAge = (users) =>
+    users.reduce((result, user) => {
+      const { age } = user.vehicle
+      if (!result[age]) {
+        result[age] = { name: `${age} years`, value: 1 }
+      } else {
+        result[age].value++
+      }
+      return result
+    }, {})
+
+  const ages = groupByAge(filteredData)
+
+  const handleAgeRangeChange = (event) => setAgeRange(event.target.value)
+
+  return (
+    <div>
+      <div style={{ display: 'flex', gap: '100px' }}>
+        <div>
+          <h2>Car Maker Chart</h2>
+          <ResponsiveContainer width={600} height={600}>
+            <PieChart>
+              <Pie
+                data={Object.values(makers)}
+                dataKey='value'
+                nameKey='name'
+                label={({ name }) => name}
+                labelLine={false}
+                cx='50%'
+                cy='50%'
+                outerRadius={200}
+                fill='#8884d8'
+              >
+                {Object.values(makers).map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={`${MAKER_COLORS[index % MAKER_COLORS.length]}`}
+                  />
+                ))}
+              </Pie>
+              <Tooltip
+                formatter={(value) => `${value} cars`}
+                labelFormatter={(name) =>
+                  `${name}: ${makers[name].models.join(', ')}`
+                }
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        <div>
+          <h2>Car Age Chart</h2>
+          <ResponsiveContainer width={600} height={600}>
+            <PieChart>
+              <Pie
+                data={Object.values(ages)}
+                dataKey='value'
+                nameKey='name'
+                label={({ name }) => name}
+                labelLine={false}
+                cx='50%'
+                cy='50%'
+                outerRadius={200}
+                fill='#8884d8'
+              >
+                {Object.values(ages).map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={`${AGE_COLORS[index % AGE_COLORS.length]}`}
+                  />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => `${value} cars`} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+      <h2>Car Maker Filter</h2>
+      <div>
+        {ageRanges.map((range) => (
+          <label key={range.value}>
+            <input
+              type='radio'
+              name='age-range'
+              value={range.value}
+              checked={ageRange === range.value}
+              onChange={handleAgeRangeChange}
+            />
+            {range.label}
+          </label>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default CarPieChart
