@@ -84,6 +84,30 @@ const renderCustomizedLabel = ({
   )
 }
 
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          background: '#fff',
+          padding: '10px',
+          border: '1px solid #ccc',
+        }}
+      >
+        <p>{`${payload[0].name}: ${payload[0].value} cars`}</p>
+        <p>{`${payload[0].payload.models.length} Models:`}</p>
+        <ul style={{ maxHeight: 400, overflow: 'auto' }}>
+          {payload[0].payload.models.map((model) => (
+            <li>{model}</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  return null
+}
+
 const initialAgeRange = ageRanges[0].value
 
 const CarPieChart = ({ users }) => {
@@ -153,12 +177,7 @@ const CarPieChart = ({ users }) => {
                   />
                 ))}
               </Pie>
-              <Tooltip
-                formatter={(value) => `${value} cars`}
-                labelFormatter={(name) =>
-                  `${name}: ${makers[name].models.join(', ')}`
-                }
-              />
+              <Tooltip content={<CustomTooltip />} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -184,7 +203,7 @@ const CarPieChart = ({ users }) => {
                   />
                 ))}
               </Pie>
-              <Tooltip formatter={(value) => `${value} cars`} />
+              <Tooltip content={<CustomTooltip />} />
             </PieChart>
           </ResponsiveContainer>
         </div>
