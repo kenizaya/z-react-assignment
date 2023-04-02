@@ -203,7 +203,7 @@ const CarPieChart = ({ users }) => {
                   />
                 ))}
               </Pie>
-              <Tooltip content={<CustomTooltip />} />
+              <Tooltip formatter={(value) => `${value} cars`} />
             </PieChart>
           </ResponsiveContainer>
         </div>
