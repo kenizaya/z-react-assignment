@@ -1,5 +1,30 @@
 import { faker } from '@faker-js/faker'
 
+const MAX_TYPES = 12
+
+const countries = []
+const manufacturers = []
+
+const setCountry = () => {
+  const tempCountry = faker.address.country()
+  if (countries.length <= 20 && !countries.includes(tempCountry)) {
+    countries.push(tempCountry)
+    return countries[countries.length - 1]
+  } else {
+    return countries[Math.floor(Math.random() * 20)]
+  }
+}
+
+const setManufacturer = () => {
+  const tempMaker = faker.vehicle.manufacturer()
+  if (manufacturers.length <= MAX_TYPES && !manufacturers.includes(tempMaker)) {
+    manufacturers.push(tempMaker)
+    return manufacturers[manufacturers.length - 1]
+  } else {
+    return manufacturers[Math.floor(Math.random() * MAX_TYPES)]
+  }
+}
+
 const generateUser = () => ({
   id: faker.datatype.uuid(),
   username: faker.internet.userName(),
