@@ -7,10 +7,10 @@ import CarList from './components/CarsList/CarsList'
 
 const App = () => {
   return (
-    <div style={{ width: '98vw', padding: '20px' }}>
+    <div style={{ width: '98vw' }}>
       <div style={{ display: 'flex' }}>
         <UserSidebar users={users} onUserClick={() => {}} />
-        <div>
+        <div style={{ padding: '20px' }}>
           <div
             style={{
               display: 'flex',

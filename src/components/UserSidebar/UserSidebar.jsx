@@ -34,8 +34,15 @@ const UserSidebar = ({ users, onUserClick }) => {
         rowIndex={index}
       >
         <div
-          className={styles['user-left-sidebar']}
-          style={style}
+          // className={styles['user-left-sidebar']}
+          style={{
+            fontSize: '1rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '10px',
+            cursor: 'pointer',
+            ...style,
+          }}
           onClick={() => handleUserClick(user)}
         >
           <div>{user.username}</div>
@@ -52,9 +59,12 @@ const UserSidebar = ({ users, onUserClick }) => {
         height: '100vh',
         width: '20%',
         overflowY: 'auto',
+        backgroundColor: 'white',
       }}
     >
-      <h2 style={{ margin: '0', padding: '0.5rem' }}>Users</h2>
+      <h2 style={{ margin: '0', padding: '0.5rem', textAlign: 'center' }}>
+        Users
+      </h2>
       <div
         style={{
           display: 'flex',
