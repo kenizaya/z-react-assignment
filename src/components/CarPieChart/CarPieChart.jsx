@@ -2,18 +2,17 @@ import React, { useState } from 'react'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 
 const MAKER_COLORS = [
-  // '#FFC312',
-  // '#C4E538',
-  // '#12CBC4',
-  // '#FDA7DF',
-  // '#ED4C67',
-  // '#F79F1F',
-  // '#A3CB38',
-  // '#1289A7',
-  // '#D980FA',
-  // '#B53471',
-  // '#E6F6FF',
-  ' #BAE3FF',
+  '#05606E',
+  '#07818F',
+  '#099AA4',
+  '#0FB5BA',
+  '#1CD4D4',
+  '#3AE7E1',
+  '#62F4EB',
+  '#92FDF2',
+]
+
+const AGE_COLORS = [
   '#7CC4FA',
   '#47A3F3',
   '#2186EB',
@@ -22,19 +21,6 @@ const MAKER_COLORS = [
   '#03449E',
   '#01337D',
   '#002159',
-]
-
-const AGE_COLORS = [
-  '#EE5A24',
-  '#009432',
-  '#0652DD',
-  '#9980FA',
-  '#833471',
-  '#EA2027',
-  '#006266',
-  '#1B1464',
-  '#5758BB',
-  '#6F1E51',
 ]
 
 const ageRanges = [
@@ -164,10 +150,10 @@ const CarPieChart = ({ users }) => {
 
   return (
     <div>
-      <div style={{ display: 'flex', gap: '100px' }}>
+      <div style={{ display: 'flex' }}>
         <div>
           <h2>Car Maker Chart</h2>
-          <ResponsiveContainer width={500} height={500}>
+          <ResponsiveContainer width={600} height={600}>
             <PieChart>
               <Pie
                 data={Object.values(makers)}
@@ -184,7 +170,7 @@ const CarPieChart = ({ users }) => {
                   <Cell
                     key={`cell-${index}`}
                     // fill={`hsla(${}, 92%, 43%, 1)`}
-                    fill={`${MAKER_COLORS[index % maker.value]}`}
+                    fill={`${MAKER_COLORS[index % MAKER_COLORS.length]}`}
                   />
                 ))}
               </Pie>
@@ -204,10 +190,10 @@ const CarPieChart = ({ users }) => {
                 labelLine={false}
                 cx='50%'
                 cy='50%'
-                outerRadius={200}
+                outerRadius={150}
                 fill='#8884d8'
               >
-                {Object.values(ages).map((entry, index) => (
+                {Object.values(ages).map((age, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={`${AGE_COLORS[index % AGE_COLORS.length]}`}
