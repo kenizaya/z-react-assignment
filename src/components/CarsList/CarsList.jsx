@@ -1,130 +1,62 @@
-import React, { useRef, useState } from 'react'
-import {
-  AutoSizer,
-  List,
-  CellMeasurer,
-  CellMeasurerCache,
-} from 'react-virtualized'
-import 'react-virtualized/styles.css'
+import React, { useState } from 'react'
+import ReactPaginate from 'react-paginate'
+const ITEMS_PER_PAGE = 25
 
-const CarList = ({ users }) => {
-  const [selectedCar, setSelectedCar] = useState(null)
-  const [carUsers, setCarUsers] = useState([])
-  const carCache = useRef(
-    new CellMeasurerCache({
-      fixedWidth: true,
-      defaultHeight: 100,
-    })
-  )
-  const usersCache = useRef(
-    new CellMeasurerCache({
-      fixedWidth: true,
-      defaultHeight: 100,
-    })
-  )
-
-  // Get unique list of car models
-  const carModels = [...new Set(users.map((user) => user.vehicle.model))]
-
-  // Handle click on a car
-  const handleCarClick = (car) => {
-    const carUsers = users.filter((user) => user.vehicle.model === car)
-    setCarUsers(carUsers)
-    setSelectedCar(car)
-  }
-
-  // Render a car row
-  const carRowRenderer = ({ index, key, style }) => {
-    const car = carModels[index]
-
-    return (
-      <CellMeasurer
-        key={key}
-        cache={carCache.current}
-        parent={parent}
-        columnIndex={0}
-        rowIndex={index}
-      >
-        <div key={key} style={style} onClick={() => handleCarClick(car)}>
-          <div>{car}</div>
-        </div>
-      </CellMeasurer>
-    )
-  }
-
-  // Render a user row
-  const userRowRenderer = ({ index, key, style }) => {
-    const { username, age } = carUsers[index]
-
-    return (
-      <CellMeasurer
-        key={key}
-        cache={usersCache.current}
-        parent={parent}
-        columnIndex={0}
-        rowIndex={index}
-      >
-        <div style={style}>
-          <div>{username}</div>
-          <div>{age}</div>
-        </div>
-      </CellMeasurer>
-    )
-  }
-
+function Items({ currentCars }) {
   return (
-    <div style={{ display: 'flex' }}>
-      <div
-        style={{
-          borderRight: '1px solid gray',
-          overflowY: 'auto',
-          height: '100vh',
-          width: '20%',
-          flex: '1',
-        }}
-      >
-        <AutoSizer>
-          {({ height, width }) => (
-            <List
-              height={height}
-              rowCount={carModels.length}
-              deferredMeasurementCache={carCache.current}
-              rowHeight={carCache.current.rowHeight}
-              rowRenderer={carRowRenderer}
-              width={width}
-            />
-          )}
-        </AutoSizer>
-      </div>
-      {selectedCar && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            overflow: 'auto',
-            width: '50%',
-            backgroundColor: 'white',
-          }}
-        >
-          <div>{selectedCar}</div>
-          <AutoSizer>
-            {({ height, width }) => (
-              <List
-                height={height}
-                rowCount={carUsers.length}
-                deferredMeasurementCache={usersCache.current}
-                rowHeight={usersCache.current.rowHeight}
-                rowRenderer={userRowRenderer}
-                width={width}
-              />
-            )}
-          </AutoSizer>
-        </div>
-      )}
-    </div>
+    <>
+      {currentCars &&
+        currentCars.map((car) => (
+          <div>
+            <h3>{car.model}</h3>
+          </div>
+        ))}
+    </>
   )
 }
 
-export default CarList
+const CarsList = ({ users }) => {
+  const cars = users.map((user) => ({
+    make: user.vehicle.make,
+    model: user.vehicle.model,
+    age: user.vehicle.age,
+  }))
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0)
+
+  // Simulate fetching items from another resources.
+  // (This could be items from props; or items loaded in a local state
+  // from an API endpoint with useEffect and useState)
+  const endOffset = itemOffset + ITEMS_PER_PAGE
+  const currentCars = cars.slice(itemOffset, endOffset)
+  const pageCount = Math.ceil(cars.length / ITEMS_PER_PAGE)
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * ITEMS_PER_PAGE) % cars.length
+    setItemOffset(newOffset)
+  }
+
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gridGap: '10px',
+      }}
+    >
+      <Items currentCars={currentCars} />
+      <ReactPaginate
+        breakLabel='...'
+        nextLabel='next >'
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel='< previous'
+        renderOnZeroPageCount={null}
+      />
+    </div>
+  )
+}
+export default CarsList

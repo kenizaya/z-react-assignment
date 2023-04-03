@@ -157,7 +157,7 @@ const CarPieChart = ({ users }) => {
 
   return (
     <div>
-      <h2>Age Filter</h2>
+      {/* <h2>Age Filter</h2> */}
       <div
         style={{
           display: 'flex',
