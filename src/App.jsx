@@ -7,11 +7,24 @@ import CarList from './components/CarsList/CarsList'
 
 const App = () => {
   return (
-    <div style={{ width: '98vw' }}>
-      <UserSidebar users={users} onUserClick={() => {}} />
+    <div style={{ width: '98vw', padding: '20px' }}>
+      <div style={{ display: 'flex' }}>
+        <UserSidebar users={users} onUserClick={() => {}} />
+        <div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <UserBarChart users={users} />
+          </div>
+          <CarPieChart users={users} />
+        </div>
+      </div>
+
       <CarList users={users} />
-      <UserBarChart users={users} />
-      <CarPieChart users={users} />
     </div>
   )
 }

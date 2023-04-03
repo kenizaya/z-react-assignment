@@ -153,7 +153,7 @@ const CarPieChart = ({ users }) => {
       <div style={{ display: 'flex' }}>
         <div>
           <h2>Car Maker Chart</h2>
-          <ResponsiveContainer width={600} height={600}>
+          <ResponsiveContainer width={600} height={400}>
             <PieChart>
               <Pie
                 data={Object.values(makers)}
@@ -163,7 +163,7 @@ const CarPieChart = ({ users }) => {
                 labelLine={false}
                 cx='50%'
                 cy='50%'
-                outerRadius={150}
+                outerRadius={125}
                 fill='#8884d8'
               >
                 {Object.values(makers).map((maker, index) => (
@@ -180,7 +180,7 @@ const CarPieChart = ({ users }) => {
         </div>
         <div>
           <h2>Car Age Chart</h2>
-          <ResponsiveContainer width={600} height={600}>
+          <ResponsiveContainer width={600} height={400}>
             <PieChart>
               <Pie
                 data={Object.values(ages)}
@@ -190,7 +190,7 @@ const CarPieChart = ({ users }) => {
                 labelLine={false}
                 cx='50%'
                 cy='50%'
-                outerRadius={150}
+                outerRadius={125}
                 fill='#8884d8'
               >
                 {Object.values(ages).map((age, index) => (

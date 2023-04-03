@@ -18,8 +18,8 @@ const UserBarChart = ({ users }) => {
 
   return (
     <BarChart
-      width={750}
-      height={400}
+      width={650}
+      height={300}
       data={data}
       margin={{
         top: 5,
