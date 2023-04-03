@@ -23,7 +23,6 @@ const UserSidebar = ({ users, onUserClick }) => {
 
   const rowRenderer = ({ index, key, style, parent }) => {
     const user = users[index]
-    console.log(user)
 
     return (
       <CellMeasurer
@@ -34,7 +33,6 @@ const UserSidebar = ({ users, onUserClick }) => {
         rowIndex={index}
       >
         <div style={style} onClick={() => handleUserClick(user)}>
-          <div>Hi</div>
           <div>{user.username}</div>
           <div>{user.age}</div>
         </div>
