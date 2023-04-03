@@ -33,9 +33,29 @@ const Root = () => {
           </nav>
           <Outlet context={{ users, setSelectedCarOwners, setShowCarOwners }} />
         </div>
-        {showCarOwners && (
-          <UserSidebar users={selectedCarOwners} onUserClick={() => {}} />
-        )}
+        <div style={{ position: 'fixed', right: 0, bottom: 0 }}>
+          {showCarOwners && (
+            <div
+              style={{
+                backgroundColor: 'white',
+                paddingTop: '20px',
+                paddingLeft: '10px',
+              }}
+            >
+              <span
+                style={{
+                  paddingLeft: '10px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                }}
+                onClick={() => setShowCarOwners(false)}
+              >
+                close
+              </span>
+              <UserSidebar users={selectedCarOwners} onUserClick={() => {}} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
