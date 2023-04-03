@@ -6,6 +6,7 @@ import {
   CellMeasurerCache,
 } from 'react-virtualized'
 import 'react-virtualized/styles.css'
+import styles from './UserSidebar.module.css'
 
 const UserSidebar = ({ users, onUserClick }) => {
   const cache = useRef(
@@ -41,6 +42,7 @@ const UserSidebar = ({ users, onUserClick }) => {
   }
   return (
     <div
+      className={styles['users-idebar']}
       style={{
         borderRight: '1px solid gray',
         height: '100vh',

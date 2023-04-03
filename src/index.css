@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 *,
 *::before,
 *::after {
@@ -5,7 +7,7 @@
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -22,6 +24,26 @@
 
 body {
   background-color: #f5f7fa;
+}
+
+/* Custom Scrollbar*/
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f5f7fa;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cbd2d9;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7b8794;
 }
 
 a {
