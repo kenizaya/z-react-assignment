@@ -4,7 +4,7 @@ import CarPieChart from '../components/CarPieChart/CarPieChart'
 import { useOutletContext } from 'react-router-dom'
 
 const StatsPage = () => {
-  const users = useOutletContext()
+  const { users } = useOutletContext()
 
   return (
     <div style={{ padding: '20px' }}>

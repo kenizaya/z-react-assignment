@@ -4,9 +4,12 @@ import UserSidebar from '../components/UserSidebar/UserSidebar'
 import { Link, Outlet } from 'react-router-dom'
 
 const Root = () => {
+  const [selectedCarOwners, setSelectedCarOwners] = React.useState([])
+  const [showCarOwners, setShowCarOwners] = React.useState(false)
+
   return (
     <div style={{ width: '98vw' }}>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', gap: '35px' }}>
         <UserSidebar users={users} onUserClick={() => {}} />
         <div>
           <nav>
@@ -28,8 +31,11 @@ const Root = () => {
               </li>
             </ul>
           </nav>
-          <Outlet context={users} />
+          <Outlet context={{ users, setSelectedCarOwners, setShowCarOwners }} />
         </div>
+        {showCarOwners && (
+          <UserSidebar users={selectedCarOwners} onUserClick={() => {}} />
+        )}
       </div>
     </div>
   )

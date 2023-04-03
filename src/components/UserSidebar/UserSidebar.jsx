@@ -114,6 +114,7 @@ const UserSidebar = ({ users, onUserClick }) => {
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'flex-end',
+                fontWeight: 'bold',
               }}
               onClick={() => setShowSidebar(false)}
             >

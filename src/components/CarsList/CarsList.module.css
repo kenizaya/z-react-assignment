@@ -1,5 +1,15 @@
 .container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 10px;
+  grid-gap: 20px;
+}
+
+.car {
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.car > h3 {
+  text-align: center;
+  margin-top: 4px;
 }

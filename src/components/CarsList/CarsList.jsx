@@ -5,13 +5,13 @@ import styles from './CarsList.module.css'
 
 const ITEMS_PER_PAGE = 25
 
-function Items({ currentCars }) {
+const Items = ({ currentCars, handleCarClick }) => {
   return (
     <>
       {currentCars &&
         currentCars.map((car) => (
-          <div>
-            <img src={supra} alt='supra' />
+          <div className={styles.car} onClick={() => handleCarClick(car)}>
+            <img src={supra} width={225} alt='supra' />
             <h3>{car}</h3>
           </div>
         ))}
@@ -19,14 +19,9 @@ function Items({ currentCars }) {
   )
 }
 
-const CarsList = ({ users }) => {
+const CarsList = ({ users, setSelectedCarOwners, setShowCarOwners }) => {
   const cars = [...new Set(users.map((user) => user.vehicle.model))]
 
-  users.map((user) => ({
-    make: user.vehicle.make,
-    model: user.vehicle.model,
-    age: user.vehicle.age,
-  }))
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0)
@@ -44,9 +39,15 @@ const CarsList = ({ users }) => {
     setItemOffset(newOffset)
   }
 
+  const handleCarClick = (car) => {
+    const selectedCarOwners = users.filter((user) => user.vehicle.model === car)
+    setSelectedCarOwners(selectedCarOwners)
+    setShowCarOwners(true)
+  }
+
   return (
     <div className={styles.container}>
-      <Items currentCars={currentCars} />
+      <Items currentCars={currentCars} handleCarClick={handleCarClick} />
       <ReactPaginate
         breakLabel='...'
         nextLabel='next >'
