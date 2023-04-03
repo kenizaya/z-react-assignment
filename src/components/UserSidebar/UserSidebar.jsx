@@ -33,7 +33,11 @@ const UserSidebar = ({ users, onUserClick }) => {
         columnIndex={0}
         rowIndex={index}
       >
-        <div style={style} onClick={() => handleUserClick(user)}>
+        <div
+          className={styles['user-left-sidebar']}
+          style={style}
+          onClick={() => handleUserClick(user)}
+        >
           <div>{user.username}</div>
           <div>{user.age}</div>
         </div>
@@ -42,14 +46,28 @@ const UserSidebar = ({ users, onUserClick }) => {
   }
   return (
     <div
-      className={styles['users-idebar']}
-      style={{
-        borderRight: '1px solid gray',
-        height: '100vh',
-        width: '20%',
-        overflowY: 'auto',
-      }}
+      className={styles['users-sidebar-container']}
+      // style={{
+      //   borderRight: '1px solid gray',
+      //   height: '100vh',
+      //   width: '20%',
+      //   overflowY: 'auto',
+      // }}
     >
+      <h2 style={{ margin: '0', padding: '0.5rem' }}>Users</h2>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '10px',
+          fontWeight: 'bold',
+        }}
+      >
+        <span>Name</span>
+        <span>Age</span>
+      </div>
+
       <AutoSizer>
         {({ height, width }) => (
           <List

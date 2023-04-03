@@ -150,6 +150,21 @@ const CarPieChart = ({ users }) => {
 
   return (
     <div>
+      <h2>Filters</h2>
+      <div>
+        {ageRanges.map((range) => (
+          <label key={range.value}>
+            <input
+              type='radio'
+              name='age-range'
+              value={range.value}
+              checked={ageRange === range.value}
+              onChange={handleAgeRangeChange}
+            />
+            {range.label}
+          </label>
+        ))}
+      </div>
       <div style={{ display: 'flex' }}>
         <div>
           <h2>Car Maker Chart</h2>
@@ -204,21 +219,6 @@ const CarPieChart = ({ users }) => {
             </PieChart>
           </ResponsiveContainer>
         </div>
-      </div>
-      <h2>Car Maker Filter</h2>
-      <div>
-        {ageRanges.map((range) => (
-          <label key={range.value}>
-            <input
-              type='radio'
-              name='age-range'
-              value={range.value}
-              checked={ageRange === range.value}
-              onChange={handleAgeRangeChange}
-            />
-            {range.label}
-          </label>
-        ))}
       </div>
     </div>
   )
