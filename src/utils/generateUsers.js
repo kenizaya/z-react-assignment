@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-const MAX_TYPES = 12
+const MAX_TYPES = 10
 
 const countries = []
 const manufacturers = []

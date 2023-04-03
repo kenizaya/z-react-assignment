@@ -20,6 +20,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+body {
+  background-color: #f5f7fa;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

@@ -2,16 +2,26 @@ import React, { useState } from 'react'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 
 const MAKER_COLORS = [
-  '#FFC312',
-  '#C4E538',
-  '#12CBC4',
-  '#FDA7DF',
-  '#ED4C67',
-  '#F79F1F',
-  '#A3CB38',
-  '#1289A7',
-  '#D980FA',
-  '#B53471',
+  // '#FFC312',
+  // '#C4E538',
+  // '#12CBC4',
+  // '#FDA7DF',
+  // '#ED4C67',
+  // '#F79F1F',
+  // '#A3CB38',
+  // '#1289A7',
+  // '#D980FA',
+  // '#B53471',
+  // '#E6F6FF',
+  ' #BAE3FF',
+  '#7CC4FA',
+  '#47A3F3',
+  '#2186EB',
+  '#0967D2',
+  '#0552B5',
+  '#03449E',
+  '#01337D',
+  '#002159',
 ]
 
 const AGE_COLORS = [
@@ -157,7 +167,7 @@ const CarPieChart = ({ users }) => {
       <div style={{ display: 'flex', gap: '100px' }}>
         <div>
           <h2>Car Maker Chart</h2>
-          <ResponsiveContainer width={600} height={600}>
+          <ResponsiveContainer width={500} height={500}>
             <PieChart>
               <Pie
                 data={Object.values(makers)}
@@ -167,13 +177,14 @@ const CarPieChart = ({ users }) => {
                 labelLine={false}
                 cx='50%'
                 cy='50%'
-                outerRadius={200}
+                outerRadius={150}
                 fill='#8884d8'
               >
-                {Object.values(makers).map((entry, index) => (
+                {Object.values(makers).map((maker, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={`${MAKER_COLORS[index % MAKER_COLORS.length]}`}
+                    // fill={`hsla(${}, 92%, 43%, 1)`}
+                    fill={`${MAKER_COLORS[index % maker.value]}`}
                   />
                 ))}
               </Pie>
