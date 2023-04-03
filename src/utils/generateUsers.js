@@ -51,6 +51,6 @@ const generateUser = () => ({
 
 export const users = []
 
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 100000; i++) {
   users.push(generateUser())
 }

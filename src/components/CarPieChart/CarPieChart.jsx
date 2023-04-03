@@ -91,12 +91,7 @@ const CustomTooltip = ({ active, payload }) => {
         }}
       >
         <p>{`${payload[0].name}: ${payload[0].value} cars`}</p>
-        <p>{`${payload[0].payload.models.length} Models:`}</p>
-        <ul style={{ maxHeight: 400, overflow: 'auto' }}>
-          {payload[0].payload.models.map((model) => (
-            <li key={model}>{model}</li>
-          ))}
-        </ul>
+        <p>{`${payload[0].payload.models.length} models`}</p>
       </div>
     )
   }
