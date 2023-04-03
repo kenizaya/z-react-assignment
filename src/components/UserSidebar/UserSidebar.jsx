@@ -47,12 +47,12 @@ const UserSidebar = ({ users, onUserClick }) => {
   return (
     <div
       className={styles['users-sidebar-container']}
-      // style={{
-      //   borderRight: '1px solid gray',
-      //   height: '100vh',
-      //   width: '20%',
-      //   overflowY: 'auto',
-      // }}
+      style={{
+        borderRight: '1px solid gray',
+        height: '100vh',
+        width: '20%',
+        overflowY: 'auto',
+      }}
     >
       <h2 style={{ margin: '0', padding: '0.5rem' }}>Users</h2>
       <div

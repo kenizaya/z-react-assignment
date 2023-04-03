@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+  Label,
+} from 'recharts'
 
 const MAKER_COLORS = [
   '#05606E',
@@ -150,8 +157,15 @@ const CarPieChart = ({ users }) => {
 
   return (
     <div>
-      <h2>Filters</h2>
-      <div>
+      <h2>Age Filter</h2>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '16px',
+        }}
+      >
         {ageRanges.map((range) => (
           <label key={range.value}>
             <input
@@ -167,7 +181,7 @@ const CarPieChart = ({ users }) => {
       </div>
       <div style={{ display: 'flex' }}>
         <div>
-          <h2>Car Maker Chart</h2>
+          {/* <h2>Car Maker Chart</h2> */}
           <ResponsiveContainer width={600} height={400}>
             <PieChart>
               <Pie
@@ -188,13 +202,14 @@ const CarPieChart = ({ users }) => {
                     fill={`${MAKER_COLORS[index % MAKER_COLORS.length]}`}
                   />
                 ))}
+                <Label value='Car Makers' position='outside' offset={5} />
               </Pie>
               <Tooltip content={<CustomTooltip />} />
             </PieChart>
           </ResponsiveContainer>
         </div>
         <div>
-          <h2>Car Age Chart</h2>
+          {/* <h2>Car Age Chart</h2> */}
           <ResponsiveContainer width={600} height={400}>
             <PieChart>
               <Pie
