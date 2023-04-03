@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import ReactPaginate from 'react-paginate'
+import supra from '../../assets/supra.jpg'
+import styles from './CarsList.module.css'
+
 const ITEMS_PER_PAGE = 25
 
 function Items({ currentCars }) {
@@ -8,7 +11,8 @@ function Items({ currentCars }) {
       {currentCars &&
         currentCars.map((car) => (
           <div>
-            <h3>{car.model}</h3>
+            <img src={supra} alt='supra' />
+            <h3>{car}</h3>
           </div>
         ))}
     </>
@@ -16,7 +20,9 @@ function Items({ currentCars }) {
 }
 
 const CarsList = ({ users }) => {
-  const cars = users.map((user) => ({
+  const cars = [...new Set(users.map((user) => user.vehicle.model))]
+
+  users.map((user) => ({
     make: user.vehicle.make,
     model: user.vehicle.model,
     age: user.vehicle.age,
@@ -39,13 +45,7 @@ const CarsList = ({ users }) => {
   }
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(5, 1fr)',
-        gridGap: '10px',
-      }}
-    >
+    <div className={styles.container}>
       <Items currentCars={currentCars} />
       <ReactPaginate
         breakLabel='...'

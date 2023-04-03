@@ -164,6 +164,7 @@ const CarPieChart = ({ users }) => {
           justifyContent: 'center',
           alignItems: 'center',
           gap: '16px',
+          marginTop: '16px',
         }}
       >
         {ageRanges.map((range) => (
@@ -202,7 +203,6 @@ const CarPieChart = ({ users }) => {
                     fill={`${MAKER_COLORS[index % MAKER_COLORS.length]}`}
                   />
                 ))}
-                <Label value='Car Makers' position='outside' offset={5} />
               </Pie>
               <Tooltip content={<CustomTooltip />} />
             </PieChart>

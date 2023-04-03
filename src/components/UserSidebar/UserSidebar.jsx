@@ -16,10 +16,11 @@ const UserSidebar = ({ users, onUserClick }) => {
     })
   )
   const [selectedUser, setSelectedUser] = useState(null)
-  const [showSidebar, setShowSidebar] = useState(true)
+  const [showSidebar, setShowSidebar] = useState(false)
 
   const handleUserClick = (user) => {
     setSelectedUser(user)
+    setShowSidebar(true)
     // onUserClick(user)
   }
 
@@ -35,7 +36,7 @@ const UserSidebar = ({ users, onUserClick }) => {
         rowIndex={index}
       >
         <div
-          // className={styles['user-left-sidebar']}
+          className={styles['user-left-sidebar']}
           style={{
             fontSize: '1rem',
             display: 'flex',
@@ -54,7 +55,6 @@ const UserSidebar = ({ users, onUserClick }) => {
   }
   return (
     <div
-      className={styles['users-sidebar-container']}
       style={{
         borderRight: '1px solid gray',
         minHeight: '95vh',
@@ -92,49 +92,63 @@ const UserSidebar = ({ users, onUserClick }) => {
         )}
       </AutoSizer>
       {showSidebar && selectedUser && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            width: '20%',
-            backgroundColor: 'white',
-            zIndex: 10,
-            padding: '20px',
-            boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.3)',
-            fontSize: '14px',
-            lineHeight: '1.5',
-            color: '#333',
-          }}
-        >
-          <h2 style={{ marginBottom: '20px' }}>{selectedUser.username}</h2>
-          <div>
-            <span style={{ fontWeight: 'bold' }}>Age:</span> {selectedUser.age}
+        <>
+          <div
+            style={{
+              position: 'fixed',
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: '20%',
+              backgroundColor: 'white',
+              zIndex: 10,
+              padding: '20px',
+              boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.3)',
+              fontSize: '14px',
+              lineHeight: '1.5',
+              color: '#333',
+            }}
+          >
+            <div
+              style={{
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'flex-end',
+              }}
+              onClick={() => setShowSidebar(false)}
+            >
+              close
+            </div>
+
+            <h2 style={{ marginBottom: '20px' }}>{selectedUser.username}</h2>
+            <div>
+              <span style={{ fontWeight: 'bold' }}>Age:</span>{' '}
+              {selectedUser.age}
+            </div>
+            <div>
+              <span style={{ fontWeight: 'bold' }}>Phone:</span>{' '}
+              {selectedUser.phoneNumber}
+            </div>
+            <div>
+              <span style={{ fontWeight: 'bold' }}>Occupation:</span>{' '}
+              {selectedUser.occupation}
+            </div>
+            <div>
+              <span style={{ fontWeight: 'bold' }}>Address:</span>{' '}
+              {selectedUser.address.street}, {selectedUser.address.city},{' '}
+              {selectedUser.address.state} {selectedUser.address.zipCode}
+            </div>
+            <div>
+              <span style={{ fontWeight: 'bold' }}>Country:</span>{' '}
+              {selectedUser.address.country}
+            </div>
+            <div>
+              <span style={{ fontWeight: 'bold' }}>Vehicle:</span>{' '}
+              {selectedUser.vehicle.make} {selectedUser.vehicle.model} (
+              {selectedUser.vehicle.age} years old)
+            </div>
           </div>
-          <div>
-            <span style={{ fontWeight: 'bold' }}>Phone:</span>{' '}
-            {selectedUser.phoneNumber}
-          </div>
-          <div>
-            <span style={{ fontWeight: 'bold' }}>Occupation:</span>{' '}
-            {selectedUser.occupation}
-          </div>
-          <div>
-            <span style={{ fontWeight: 'bold' }}>Address:</span>{' '}
-            {selectedUser.address.street}, {selectedUser.address.city},{' '}
-            {selectedUser.address.state} {selectedUser.address.zipCode}
-          </div>
-          <div>
-            <span style={{ fontWeight: 'bold' }}>Country:</span>{' '}
-            {selectedUser.address.country}
-          </div>
-          <div>
-            <span style={{ fontWeight: 'bold' }}>Vehicle:</span>{' '}
-            {selectedUser.vehicle.make} {selectedUser.vehicle.model} (
-            {selectedUser.vehicle.age} years old)
-          </div>
-        </div>
+        </>
       )}
     </div>
   )
