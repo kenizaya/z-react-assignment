@@ -6,7 +6,6 @@ import {
   CellMeasurerCache,
 } from 'react-virtualized'
 import 'react-virtualized/styles.css'
-import styles from './UserSidebar.module.css'
 
 const UserSidebar = ({ users, onUserClick, title }) => {
   const cache = useRef(
@@ -36,7 +35,6 @@ const UserSidebar = ({ users, onUserClick, title }) => {
         rowIndex={index}
       >
         <div
-          className={styles.leftSidebarItem}
           style={{
             fontSize: '1rem',
             display: 'flex',

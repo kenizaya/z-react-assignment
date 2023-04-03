@@ -61,7 +61,7 @@ const CarsList = ({
   const pageCount = Math.ceil(uniqueCars.length / carsPerPage)
 
   return (
-    <>
+    <section style={{ marginLeft: '100px' }}>
       <List
         width={700}
         height={600}
@@ -91,7 +91,7 @@ const CarsList = ({
           nextLabel={'Next'}
         />
       </div>
-    </>
+    </section>
   )
 }
 
