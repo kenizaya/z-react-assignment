@@ -1,7 +1,3 @@
-.user-left-sidebar {
-  font-size: 2rem;
-  display: flex;
-  justify-content: space-between;
-  padding: 1000px;
-  cursor: pointer;
+.leftSidebarItem:hover {
+  color: black;
 }

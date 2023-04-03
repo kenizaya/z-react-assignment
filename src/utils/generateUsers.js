@@ -45,6 +45,7 @@ const generateUser = () => ({
     age:
       new Date().getFullYear() -
       faker.datatype.number({ min: 1998, max: 2010 }),
+    price: faker.datatype.number({ min: 10000, max: 100000 }),
   },
 })
 

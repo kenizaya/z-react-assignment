@@ -8,7 +8,7 @@ import {
 import 'react-virtualized/styles.css'
 import styles from './UserSidebar.module.css'
 
-const UserSidebar = ({ users, onUserClick }) => {
+const UserSidebar = ({ users, onUserClick, title }) => {
   const cache = useRef(
     new CellMeasurerCache({
       fixedWidth: true,
@@ -36,7 +36,7 @@ const UserSidebar = ({ users, onUserClick }) => {
         rowIndex={index}
       >
         <div
-          className={styles['user-left-sidebar']}
+          className={styles.leftSidebarItem}
           style={{
             fontSize: '1rem',
             display: 'flex',
@@ -59,12 +59,11 @@ const UserSidebar = ({ users, onUserClick }) => {
         borderRight: '1px solid gray',
         minHeight: '95vh',
         minWidth: '275px',
-        overflowY: 'auto',
         backgroundColor: 'white',
       }}
     >
       <h2 style={{ margin: '0', padding: '0.5rem', textAlign: 'center' }}>
-        Users
+        {title}
       </h2>
       <div
         style={{

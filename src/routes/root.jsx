@@ -6,11 +6,10 @@ import { Link, Outlet } from 'react-router-dom'
 const Root = () => {
   const [selectedCarOwners, setSelectedCarOwners] = React.useState([])
   const [showCarOwners, setShowCarOwners] = React.useState(false)
-
   return (
-    <div style={{ width: '98vw' }}>
+    <div style={{ minWidth: '100vw' }}>
       <div style={{ display: 'flex', gap: '35px' }}>
-        <UserSidebar users={users} onUserClick={() => {}} />
+        <UserSidebar users={users} title={'Users'} onUserClick={() => {}} />
         <div>
           <nav>
             <ul
@@ -52,7 +51,11 @@ const Root = () => {
               >
                 close
               </span>
-              <UserSidebar users={selectedCarOwners} onUserClick={() => {}} />
+              <UserSidebar
+                users={selectedCarOwners}
+                title={'Owners'}
+                onUserClick={() => {}}
+              />
             </div>
           )}
         </div>
