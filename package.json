@@ -9,10 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.10.0",
     "react-virtualized": "^9.22.3",
-    "recharts": "^2.5.0"
+    "recharts": "^2.5.0",
+    "sort-by": "^1.2.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
@@ -21,9 +25,7 @@
     "@vitejs/plugin-react-swc": "^3.0.0",
     "vite": "^4.2.0"
   },
-  
-    "resolutions": {
-        "react-virtualized": "git+https://git@github.com/remorses/react-virtualized-fixed-import.git#9.22.3"
-    }
-
+  "resolutions": {
+    "react-virtualized": "git+https://git@github.com/remorses/react-virtualized-fixed-import.git#9.22.3"
+  }
 }

@@ -16,6 +16,7 @@ const UserSidebar = ({ users, onUserClick }) => {
     })
   )
   const [selectedUser, setSelectedUser] = useState(null)
+  const [showSidebar, setShowSidebar] = useState(true)
 
   const handleUserClick = (user) => {
     setSelectedUser(user)
@@ -56,8 +57,8 @@ const UserSidebar = ({ users, onUserClick }) => {
       className={styles['users-sidebar-container']}
       style={{
         borderRight: '1px solid gray',
-        height: '100vh',
-        width: '20%',
+        minHeight: '95vh',
+        minWidth: '275px',
         overflowY: 'auto',
         backgroundColor: 'white',
       }}
@@ -90,30 +91,49 @@ const UserSidebar = ({ users, onUserClick }) => {
           />
         )}
       </AutoSizer>
-      {selectedUser && (
+      {showSidebar && selectedUser && (
         <div
           style={{
             position: 'fixed',
             top: 0,
             right: 0,
             bottom: 0,
-            width: '50%',
+            width: '20%',
             backgroundColor: 'white',
+            zIndex: 10,
+            padding: '20px',
+            boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.3)',
+            fontSize: '14px',
+            lineHeight: '1.5',
+            color: '#333',
           }}
         >
-          <div>{selectedUser.username}</div>
-          <div>{selectedUser.age}</div>
-          <div>{selectedUser.phoneNumber}</div>
-          <div>{selectedUser.occupation}</div>
-          <div>{selectedUser.address.street}</div>
-          <div>{selectedUser.address.city}</div>
-          <div>{selectedUser.address.state}</div>
-          <div>{selectedUser.address.streetAddress}</div>
-          <div>{selectedUser.address.zipCode}</div>
-          <div>{selectedUser.address.country}</div>
-          <div>{selectedUser.vehicle.make}</div>
-          <div>{selectedUser.vehicle.model}</div>
-          <div>{selectedUser.vehicle.age}</div>
+          <h2 style={{ marginBottom: '20px' }}>{selectedUser.username}</h2>
+          <div>
+            <span style={{ fontWeight: 'bold' }}>Age:</span> {selectedUser.age}
+          </div>
+          <div>
+            <span style={{ fontWeight: 'bold' }}>Phone:</span>{' '}
+            {selectedUser.phoneNumber}
+          </div>
+          <div>
+            <span style={{ fontWeight: 'bold' }}>Occupation:</span>{' '}
+            {selectedUser.occupation}
+          </div>
+          <div>
+            <span style={{ fontWeight: 'bold' }}>Address:</span>{' '}
+            {selectedUser.address.street}, {selectedUser.address.city},{' '}
+            {selectedUser.address.state} {selectedUser.address.zipCode}
+          </div>
+          <div>
+            <span style={{ fontWeight: 'bold' }}>Country:</span>{' '}
+            {selectedUser.address.country}
+          </div>
+          <div>
+            <span style={{ fontWeight: 'bold' }}>Vehicle:</span>{' '}
+            {selectedUser.vehicle.make} {selectedUser.vehicle.model} (
+            {selectedUser.vehicle.age} years old)
+          </div>
         </div>
       )}
     </div>
