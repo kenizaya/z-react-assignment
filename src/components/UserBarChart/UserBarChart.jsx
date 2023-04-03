@@ -32,7 +32,7 @@ const UserBarChart = ({ users }) => {
       <XAxis dataKey='name' />
       <YAxis />
       <Tooltip />
-      <Bar dataKey='count' fill='#8884d8' />
+      <Bar dataKey='count' fill='#2186EB' />
     </BarChart>
   )
 }
